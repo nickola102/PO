@@ -1,30 +1,34 @@
 package ru.netology.web.page;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
 
-import static com.codeborne.selenide.Selectors.withText;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
 public class TransferPage {
-    private String card1 = "5559 0000 0000 0001";
-    private String card2 = "5559 0000 0000 0002";
+    private SelenideElement action = $("[data-test-id=action-transfer]");
+    private SelenideElement amount = $("[data-test-id='amount'] input");
+    private SelenideElement from = $("[data-test-id='from'] input");
 
-    public DashboardPage transferMoney(String amount) {
-        $$(withText("Пополнить")).first().click();
-        $("[data-test-id='amount'] input").setValue(amount);
-        $("[data-test-id='from'] input").setValue(card2);
-        $("[data-test-id='action-transfer']").click();
+    public TransferPage() {
+        amount.shouldBe(visible);
+        from.shouldBe(visible);
+    }
+
+    public DashboardPage transferMoney(String amount, String numberCard) {
+        this.amount.setValue(amount);
+        from.setValue(numberCard);
+        action.click();
         return new DashboardPage();
     }
 
-    public DashboardPage defaultMoney(String amount) {
-        $$(withText("Пополнить")).last().click();
-        $("[data-test-id='amount'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $("[data-test-id='amount'] input").setValue(amount);
-        $("[data-test-id='from'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $("[data-test-id='from'] input").setValue(card1);
-        $("[data-test-id='action-transfer']").click();
+    public DashboardPage defaultMoney(String amount, String numberCard) {
+        this.amount.sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
+        this.amount.setValue(amount);
+        from.sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
+        from.setValue(numberCard);
+        action.click();
         return new DashboardPage();
     }
 }

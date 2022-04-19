@@ -2,11 +2,17 @@ package ru.netology.web.test;
 
 import org.junit.jupiter.api.Test;
 import ru.netology.web.data.DataHelper;
+import ru.netology.web.page.DashboardPage;
 import ru.netology.web.page.LoginPageV1;
+import ru.netology.web.page.TransferPage;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MoneyTransferTest {
+  private String card1 = DataHelper.getCardNumber1().getNumber();
+  private String card2 = DataHelper.getCardNumber2().getNumber();
+
   @Test
   void shouldTransferMoneyBetweenOwnCardsV1() {
     open("http://localhost:9999");
@@ -15,41 +21,59 @@ class MoneyTransferTest {
     var verificationPage = loginPage.validLogin(authInfo);
     var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
     verificationPage.validVerify(verificationCode);
-    new MoneyTransfer().transferMoney("2000");
-    var actual = new DashboardPage().getCardBalance(0);
-    int expected = 12000;
-    assertEquals(expected, actual);
-    new MoneyTransfer().defaultMoney("2000");
+    String money = "100";
+    new DashboardPage().firstCard();
+    new TransferPage().transferMoney(money, card2);
+    int actualCard1 = new DashboardPage().getCardBalance(0);
+    int actualCard2 = new DashboardPage().getCardBalance(1);
+    int expectedCard1 = 10100;
+    int expectedCard2 = 9900;
+    assertEquals(expectedCard1, actualCard1);
+    assertEquals(expectedCard2, actualCard2);
+    new DashboardPage().secondCard();
+    new TransferPage().defaultMoney(money, card1);
   }
 
   @Test
-  void shouldTransferMoneyBetweenOwnCardsAllV1() {
+  void shouldTransferMoneyBetweenOwnCardsV2() {
     open("http://localhost:9999");
     var loginPage = new LoginPageV1();
     var authInfo = DataHelper.getAuthInfo();
     var verificationPage = loginPage.validLogin(authInfo);
     var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
     verificationPage.validVerify(verificationCode);
-    new MoneyTransfer().transferMoney("10000");
-    var actual = new DashboardPage().getCardBalance(0);
-    int expected = 20000;
-    assertEquals(expected, actual);
-    new MoneyTransfer().defaultMoney("10000");
+    String money = "9999";
+    new DashboardPage().firstCard();
+    new TransferPage().transferMoney(money, card2);
+    int actualCard1 = new DashboardPage().getCardBalance(0);
+    int actualCard2 = new DashboardPage().getCardBalance(1);
+    int expectedCard1 = 19999;
+    int expectedCard2 = 1;
+    assertEquals(expectedCard1, actualCard1);
+    assertEquals(expectedCard2, actualCard2);
+    new DashboardPage().secondCard();
+    new TransferPage().defaultMoney(money, card1);
   }
 
   @Test
-  void shouldTransferMoneyBetweenOwnCardsAllOverV1() {
+  void shouldTransferAllMoneyBetweenOwnCards() {
     open("http://localhost:9999");
     var loginPage = new LoginPageV1();
     var authInfo = DataHelper.getAuthInfo();
     var verificationPage = loginPage.validLogin(authInfo);
     var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
     verificationPage.validVerify(verificationCode);
-    new MoneyTransfer().transferMoney("12000");
-    var actual = new DashboardPage().getCardBalance(0);
-    int expected = 22000;
-    assertEquals(expected, actual);
-    new MoneyTransfer().defaultMoney("12000");
+    String money = "10000";
+    new DashboardPage().firstCard();
+    new TransferPage().transferMoney(money, card2);
+    int actualCard1 = new DashboardPage().getCardBalance(0);
+    int actualCard2 = new DashboardPage().getCardBalance(1);
+    int expectedCard1 = 20000;
+    int expectedCard2 = 0;
+    assertEquals(expectedCard1, actualCard1);
+    assertEquals(expectedCard2, actualCard2);
+    new DashboardPage().secondCard();
+    new TransferPage().defaultMoney(money, card1);
   }
 }
 
