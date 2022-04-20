@@ -35,7 +35,7 @@ class MoneyTransferTest {
   }
 
   @Test
-  void shouldTransfer1() {
+  void shouldTransferCorrectAmount() {
     open("http://localhost:9999");
     var loginPage = new LoginPageV1();
     var authInfo = DataHelper.getAuthInfo();
@@ -56,7 +56,7 @@ class MoneyTransferTest {
   }
 
   @Test
-  void shouldTransferNearLimit() {
+  void shouldTransferNearMaxLimit() {
     open("http://localhost:9999");
     var loginPage = new LoginPageV1();
     var authInfo = DataHelper.getAuthInfo();
