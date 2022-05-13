@@ -92,13 +92,13 @@ class MoneyTransferTest {
         transferPage.transferMoney(money, card1);
     }
 
-    @Test
-    void shouldTransferOverLimit() {
-        var dashboardPage = new DashboardPage();
-        dashboardPage.firstCard();
-        String money = "10001";
-        var transferPage = new TransferPage();
-        transferPage.failedTransfer(money, card2);
-    }
+//    @Test
+//    void shouldTransferOverLimit() {
+//        var dashboardPage = new DashboardPage();
+//        dashboardPage.firstCard();
+//        String money = "10001";
+//        var transferPage = new TransferPage();
+//        transferPage.failedTransfer(money, card2);
+//    }
 }
 
