@@ -31,13 +31,13 @@ class MoneyTransferTest {
     void shouldTransferMinAmount1() {
         var dashboardPage = new DashboardPage();
         dashboardPage.firstCard();
-        val initialBalanceCard1 = dashboardPage.getCardBalance(0);
-        val initialBalanceCard2 = dashboardPage.getCardBalance(1);
+        val initialBalanceCard1 = dashboardPage.getFirstCardBalance();
+        val initialBalanceCard2 = dashboardPage.getSecondCardBalance();
         int money = 1;
         var transferPage = new TransferPage();
         transferPage.transferMoney(money, card2);
-        int actualCard1 = dashboardPage.getCardBalance(0);
-        int actualCard2 = dashboardPage.getCardBalance(1);
+        int actualCard1 = dashboardPage.getFirstCardBalance();
+        int actualCard2 = dashboardPage.getSecondCardBalance();
         int expectedCard1 = initialBalanceCard1 + money;
         int expectedCard2 = initialBalanceCard2 - money;
         assertEquals(expectedCard1, actualCard1);
