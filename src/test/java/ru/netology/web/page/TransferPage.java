@@ -19,10 +19,11 @@ public class TransferPage {
         from.shouldBe(visible);
     }
 
-    public DashboardPage transferMoney(String amount, String numberCard) {
-        this.amount.sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        this.amount.setValue(amount);
-        from.sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
+    public DashboardPage transferMoney(int amountTransfer, String numberCard) {
+//        this.amount.sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
+//        this.amount.setValue(amount);
+        amount.setValue(String.valueOf(amountTransfer));
+//        from.sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         from.setValue(numberCard);
         action.click();
         return new DashboardPage();
