@@ -1,5 +1,7 @@
 package ru.netology.web.test;
 
+import com.codeborne.selenide.Configuration;
+import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.web.data.DataHelper;
@@ -16,6 +18,7 @@ class MoneyTransferTest {
 
     @BeforeEach
     void setup() {
+        Configuration.holdBrowserOpen = true;
         open("http://localhost:9999");
         var loginPage = new LoginPageV1();
         var authInfo = DataHelper.getAuthInfo();
@@ -25,72 +28,91 @@ class MoneyTransferTest {
     }
 
     @Test
-    void shouldTransferMinAmount() {
+    void shouldTransferMinAmount1() {
         var dashboardPage = new DashboardPage();
+//        val initialBalanceCard1 = dashboardPage.getSecondCardBalance();
+//        val initialBalanceCard2 = dashboardPage.getFirstCardBalance();
         dashboardPage.firstCard();
         String money = "1";
         var transferPage = new TransferPage();
         transferPage.transferMoney(money, card2);
-        int actualCard1 = dashboardPage.getCardBalance(0);
-        int actualCard2 = dashboardPage.getCardBalance(1);
+        int actualCard1 = dashboardPage.getFirstCardBalance();
+        int actualCard2  = dashboardPage.getSecondCardBalance();
+//        int actualCard1 = dashboardPage.getCardBalance(0);
+//        int actualCard2 = dashboardPage.getCardBalance(1);
         int expectedCard1 = 10001;
         int expectedCard2 = 9999;
         assertEquals(expectedCard1, actualCard1);
         assertEquals(expectedCard2, actualCard2);
-        dashboardPage.secondCard();
-        transferPage.transferMoney(money, card1);
     }
 
-    @Test
-    void shouldTransferCorrectAmount() {
-        var dashboardPage = new DashboardPage();
-        dashboardPage.firstCard();
-        String money = "5000";
-        var transferPage = new TransferPage();
-        transferPage.transferMoney(money, card2);
-        int actualCard1 = dashboardPage.getCardBalance(0);
-        int actualCard2 = dashboardPage.getCardBalance(1);
-        int expectedCard1 = 15000;
-        int expectedCard2 = 5000;
-        assertEquals(expectedCard1, actualCard1);
-        assertEquals(expectedCard2, actualCard2);
-        dashboardPage.secondCard();
-        transferPage.transferMoney(money, card1);
-    }
-
-    @Test
-    void shouldTransferNearMaxLimit() {
-        var dashboardPage = new DashboardPage();
-        dashboardPage.firstCard();
-        String money = "9999";
-        var transferPage = new TransferPage();
-        transferPage.transferMoney(money, card2);
-        int actualCard1 = dashboardPage.getCardBalance(0);
-        int actualCard2 = dashboardPage.getCardBalance(1);
-        int expectedCard1 = 19999;
-        int expectedCard2 = 1;
-        assertEquals(expectedCard1, actualCard1);
-        assertEquals(expectedCard2, actualCard2);
-        dashboardPage.secondCard();
-        transferPage.transferMoney(money, card1);
-    }
-
-    @Test
-    void shouldTransferMax() {
-        var dashboardPage = new DashboardPage();
-        dashboardPage.firstCard();
-        String money = "10000";
-        var transferPage = new TransferPage();
-        transferPage.transferMoney(money, card2);
-        int actualCard1 = dashboardPage.getCardBalance(0);
-        int actualCard2 = dashboardPage.getCardBalance(1);
-        int expectedCard1 = 20000;
-        int expectedCard2 = 0;
-        assertEquals(expectedCard1, actualCard1);
-        assertEquals(expectedCard2, actualCard2);
-        dashboardPage.secondCard();
-        transferPage.transferMoney(money, card1);
-    }
+//    @Test
+//    void shouldTransferMinAmount() {
+//        var dashboardPage = new DashboardPage();
+//        dashboardPage.firstCard();
+//        String money = "1";
+//        var transferPage = new TransferPage();
+//        transferPage.transferMoney(money, card2);
+//        int actualCard1 = dashboardPage.getCardBalance(0);
+//        int actualCard2 = dashboardPage.getCardBalance(1);
+//        int expectedCard1 = 10001;
+//        int expectedCard2 = 9999;
+//        assertEquals(expectedCard1, actualCard1);
+//        assertEquals(expectedCard2, actualCard2);
+//        dashboardPage.secondCard();
+//        transferPage.transferMoney(money, card1);
+//    }
+//
+//    @Test
+//    void shouldTransferCorrectAmount() {
+//        var dashboardPage = new DashboardPage();
+//        dashboardPage.firstCard();
+//        String money = "5000";
+//        var transferPage = new TransferPage();
+//        transferPage.transferMoney(money, card2);
+//        int actualCard1 = dashboardPage.getCardBalance(0);
+//        int actualCard2 = dashboardPage.getCardBalance(1);
+//        int expectedCard1 = 15000;
+//        int expectedCard2 = 5000;
+//        assertEquals(expectedCard1, actualCard1);
+//        assertEquals(expectedCard2, actualCard2);
+//        dashboardPage.secondCard();
+//        transferPage.transferMoney(money, card1);
+//    }
+//
+//    @Test
+//    void shouldTransferNearMaxLimit() {
+//        var dashboardPage = new DashboardPage();
+//        dashboardPage.firstCard();
+//        String money = "9999";
+//        var transferPage = new TransferPage();
+//        transferPage.transferMoney(money, card2);
+//        int actualCard1 = dashboardPage.getCardBalance(0);
+//        int actualCard2 = dashboardPage.getCardBalance(1);
+//        int expectedCard1 = 19999;
+//        int expectedCard2 = 1;
+//        assertEquals(expectedCard1, actualCard1);
+//        assertEquals(expectedCard2, actualCard2);
+//        dashboardPage.secondCard();
+//        transferPage.transferMoney(money, card1);
+//    }
+//
+//    @Test
+//    void shouldTransferMax() {
+//        var dashboardPage = new DashboardPage();
+//        dashboardPage.firstCard();
+//        String money = "10000";
+//        var transferPage = new TransferPage();
+//        transferPage.transferMoney(money, card2);
+//        int actualCard1 = dashboardPage.getCardBalance(0);
+//        int actualCard2 = dashboardPage.getCardBalance(1);
+//        int expectedCard1 = 20000;
+//        int expectedCard2 = 0;
+//        assertEquals(expectedCard1, actualCard1);
+//        assertEquals(expectedCard2, actualCard2);
+//        dashboardPage.secondCard();
+//        transferPage.transferMoney(money, card1);
+//    }
 
 //    @Test
 //    void shouldTransferOverLimit() {
