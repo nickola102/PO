@@ -1,7 +1,6 @@
 package ru.netology.web.page;
 
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.withText;
@@ -20,10 +19,7 @@ public class TransferPage {
     }
 
     public DashboardPage transferMoney(int amountTransfer, String numberCard) {
-//        this.amount.sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-//        this.amount.setValue(amount);
         amount.setValue(String.valueOf(amountTransfer));
-//        from.sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         from.setValue(numberCard);
         action.click();
         return new DashboardPage();
