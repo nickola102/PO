@@ -30,9 +30,9 @@ class MoneyTransferTest {
     @Test
     void shouldTransferMinAmount1() {
         var dashboardPage = new DashboardPage();
-        dashboardPage.firstCard();
         val initialBalanceCard1 = dashboardPage.getFirstCardBalance();
         val initialBalanceCard2 = dashboardPage.getSecondCardBalance();
+        dashboardPage.firstCard();
         int money = 1;
         var transferPage = new TransferPage();
         transferPage.transferMoney(money, card2);
