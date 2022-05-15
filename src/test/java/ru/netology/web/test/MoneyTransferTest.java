@@ -62,7 +62,7 @@ class MoneyTransferTest {
 
 
     @Test
-    void shouldTransferCorrectAmount() {
+    void shouldTransferCorrectAmountFromCard2ToCard1() {
         var dashboardPage = new DashboardPage();
         int initialBalanceCard1 = dashboardPage.getCardBalance(0);
         int initialBalanceCard2 = dashboardPage.getCardBalance(1);
@@ -74,6 +74,23 @@ class MoneyTransferTest {
         int actualCard2 = dashboardPage.getCardBalance(1);
         int expectedCard1 = initialBalanceCard1 + money;
         int expectedCard2 = initialBalanceCard2 - money;
+        assertEquals(expectedCard1, actualCard1);
+        assertEquals(expectedCard2, actualCard2);
+    }
+
+    @Test
+    void shouldTransferCorrectAmountFromCard1ToCard2() {
+        var dashboardPage = new DashboardPage();
+        int initialBalanceCard1 = dashboardPage.getCardBalance(0);
+        int initialBalanceCard2 = dashboardPage.getCardBalance(1);
+        dashboardPage.secondCard();
+        int money = 5000;
+        var transferPage = new TransferPage();
+        transferPage.transferMoney(money, card1);
+        int actualCard1 = dashboardPage.getCardBalance(0);
+        int actualCard2 = dashboardPage.getCardBalance(1);
+        int expectedCard1 = initialBalanceCard1 - money;
+        int expectedCard2 = initialBalanceCard2 + money;
         assertEquals(expectedCard1, actualCard1);
         assertEquals(expectedCard2, actualCard2);
     }
