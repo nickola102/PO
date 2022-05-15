@@ -49,9 +49,5 @@ public class DashboardPage {
         return new TransferPage();
     }
 
-    public TransferPage secondCard() {
-        lastButton.click();
-        return new TransferPage();
-    }
 }
 

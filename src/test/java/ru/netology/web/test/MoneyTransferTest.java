@@ -26,58 +26,58 @@ class MoneyTransferTest {
         verificationPage.validVerify(verificationCode);
     }
 
-//    @Test
-//    void shouldTransferZero() {
-//        var dashboardPage = new DashboardPage();
-//        int initialBalanceCard1 = dashboardPage.getCardBalance(0);
-//        int initialBalanceCard2 = dashboardPage.getCardBalance(1);
-//        dashboardPage.firstCard();
-//        int money = 0;
-//        var transferPage = new TransferPage();
-//        transferPage.transferMoney(money, card2);
-//        int actualCard1 = dashboardPage.getCardBalance(0);
-//        int actualCard2 = dashboardPage.getCardBalance(1);
-//        int expectedCard1 = initialBalanceCard1 + money;
-//        int expectedCard2 = initialBalanceCard2 - money;
-//        assertEquals(expectedCard1, actualCard1);
-//        assertEquals(expectedCard2, actualCard2);
-//    }
-//
-//    @Test
-//    void shouldTransferMinAmount() {
-//        var dashboardPage = new DashboardPage();
-//        int initialBalanceCard1 = dashboardPage.getCardBalance(0);
-//        int initialBalanceCard2 = dashboardPage.getCardBalance(1);
-//        dashboardPage.firstCard();
-//        int money = 1;
-//        var transferPage = new TransferPage();
-//        transferPage.transferMoney(money, card2);
-//        int actualCard1 = dashboardPage.getCardBalance(0);
-//        int actualCard2 = dashboardPage.getCardBalance(1);
-//        int expectedCard1 = initialBalanceCard1 + money;
-//        int expectedCard2 = initialBalanceCard2 - money;
-//        assertEquals(expectedCard1, actualCard1);
-//        assertEquals(expectedCard2, actualCard2);
-//    }
-//
-//
-//    @Test
-//    void shouldTransferCorrectAmount() {
-//        var dashboardPage = new DashboardPage();
-//        int initialBalanceCard1 = dashboardPage.getCardBalance(0);
-//        int initialBalanceCard2 = dashboardPage.getCardBalance(1);
-//        dashboardPage.firstCard();
-//        int money = 5000;
-//        var transferPage = new TransferPage();
-//        transferPage.transferMoney(money, card2);
-//        int actualCard1 = dashboardPage.getCardBalance(0);
-//        int actualCard2 = dashboardPage.getCardBalance(1);
-//        int expectedCard1 = initialBalanceCard1 + money;
-//        int expectedCard2 = initialBalanceCard2 - money;
-//        assertEquals(expectedCard1, actualCard1);
-//        assertEquals(expectedCard2, actualCard2);
-//    }
-//
+    @Test
+    void shouldTransferZero() {
+        var dashboardPage = new DashboardPage();
+        int initialBalanceCard1 = dashboardPage.getCardBalance(0);
+        int initialBalanceCard2 = dashboardPage.getCardBalance(1);
+        dashboardPage.firstCard();
+        int money = 0;
+        var transferPage = new TransferPage();
+        transferPage.transferMoney(money, card2);
+        int actualCard1 = dashboardPage.getCardBalance(0);
+        int actualCard2 = dashboardPage.getCardBalance(1);
+        int expectedCard1 = initialBalanceCard1 + money;
+        int expectedCard2 = initialBalanceCard2 - money;
+        assertEquals(expectedCard1, actualCard1);
+        assertEquals(expectedCard2, actualCard2);
+    }
+
+    @Test
+    void shouldTransferMinAmount() {
+        var dashboardPage = new DashboardPage();
+        int initialBalanceCard1 = dashboardPage.getCardBalance(0);
+        int initialBalanceCard2 = dashboardPage.getCardBalance(1);
+        dashboardPage.firstCard();
+        int money = 1;
+        var transferPage = new TransferPage();
+        transferPage.transferMoney(money, card2);
+        int actualCard1 = dashboardPage.getCardBalance(0);
+        int actualCard2 = dashboardPage.getCardBalance(1);
+        int expectedCard1 = initialBalanceCard1 + money;
+        int expectedCard2 = initialBalanceCard2 - money;
+        assertEquals(expectedCard1, actualCard1);
+        assertEquals(expectedCard2, actualCard2);
+    }
+
+
+    @Test
+    void shouldTransferCorrectAmount() {
+        var dashboardPage = new DashboardPage();
+        int initialBalanceCard1 = dashboardPage.getCardBalance(0);
+        int initialBalanceCard2 = dashboardPage.getCardBalance(1);
+        dashboardPage.firstCard();
+        int money = 5000;
+        var transferPage = new TransferPage();
+        transferPage.transferMoney(money, card2);
+        int actualCard1 = dashboardPage.getCardBalance(0);
+        int actualCard2 = dashboardPage.getCardBalance(1);
+        int expectedCard1 = initialBalanceCard1 + money;
+        int expectedCard2 = initialBalanceCard2 - money;
+        assertEquals(expectedCard1, actualCard1);
+        assertEquals(expectedCard2, actualCard2);
+    }
+
     @Test
     void shouldTransferNearMaxLimit() {
         var dashboardPage = new DashboardPage();
@@ -94,31 +94,14 @@ class MoneyTransferTest {
         assertEquals(expectedCard1, actualCard1);
         assertEquals(expectedCard2, actualCard2);
     }
-//
-//    @Test
-//    void shouldTransferMax() {
-//        var dashboardPage = new DashboardPage();
-//        int initialBalanceCard1 = dashboardPage.getCardBalance(0);
-//        int initialBalanceCard2 = dashboardPage.getCardBalance(1);
-//        dashboardPage.firstCard();
-//        int money = initialBalanceCard2;
-//        var transferPage = new TransferPage();
-//        transferPage.transferMoney(money, card2);
-//        int actualCard1 = dashboardPage.getCardBalance(0);
-//        int actualCard2 = dashboardPage.getCardBalance(1);
-//        int expectedCard1 = initialBalanceCard1 + money;
-//        int expectedCard2 = initialBalanceCard2 - money;
-//        assertEquals(expectedCard1, actualCard1);
-//        assertEquals(expectedCard2, actualCard2);
-//    }
 
     @Test
-    void shouldTransferOverLimit() {
+    void shouldTransferMax() {
         var dashboardPage = new DashboardPage();
         int initialBalanceCard1 = dashboardPage.getCardBalance(0);
         int initialBalanceCard2 = dashboardPage.getCardBalance(1);
         dashboardPage.firstCard();
-        int money = initialBalanceCard2 + 1;
+        int money = initialBalanceCard2;
         var transferPage = new TransferPage();
         transferPage.transferMoney(money, card2);
         int actualCard1 = dashboardPage.getCardBalance(0);
@@ -127,7 +110,17 @@ class MoneyTransferTest {
         int expectedCard2 = initialBalanceCard2 - money;
         assertEquals(expectedCard1, actualCard1);
         assertEquals(expectedCard2, actualCard2);
-//        transferPage.failedTransfer(money, card2);
+    }
+
+    @Test
+    void shouldTransferOverLimit() {
+        var dashboardPage = new DashboardPage();
+        int initialBalanceCard2 = dashboardPage.getCardBalance(1);
+        dashboardPage.firstCard();
+        int money = initialBalanceCard2 + 1;
+        var transferPage = new TransferPage();
+        transferPage.transferMoney(money, card2);
+        transferPage.failedTransfer();
     }
 }
 

@@ -11,7 +11,6 @@ public class TransferPage {
     private SelenideElement action = $("[data-test-id=action-transfer]");
     private SelenideElement amount = $("[data-test-id='amount'] input");
     private SelenideElement from = $("[data-test-id='from'] input");
-    private SelenideElement cancelButton = $("[data-test-id=action-cancel]");
 
     public TransferPage() {
         amount.shouldBe(visible);
@@ -25,11 +24,7 @@ public class TransferPage {
         return new DashboardPage();
     }
 
-    public  DashboardPage failedTransfer(String amount, String numberCard) {
-        this.amount.setValue(amount);
-        from.setValue(numberCard);
-        action.click();
+    public void failedTransfer() {
         $(withText("Сумма перевода превышает баланс карты")).shouldBe(visible);
-        return new DashboardPage();
     }
 }
