@@ -79,7 +79,7 @@ class MoneyTransferTest {
     }
 
     @Test
-    void shouldTransferNearMaxLimit() {
+    void shouldTransferNearMaxLimit1() {
         var dashboardPage = new DashboardPage();
         int initialBalanceCard1 = dashboardPage.getCardBalance(0);
         int initialBalanceCard2 = dashboardPage.getCardBalance(1);
